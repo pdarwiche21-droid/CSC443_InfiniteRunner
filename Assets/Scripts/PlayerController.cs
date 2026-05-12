@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -41,7 +42,36 @@ public class PlayerController : MonoBehaviour
         int half = laneCount / 2;
         _laneIndex = Mathf.Clamp(_laneIndex + delta, -half, half);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        // If the bunny's trigger touches the spike's trigger
+        if (other.CompareTag("Obstacle"))
+        {
+            Die();
+        }
+    }
 
+    private void Die()
+    {
+        Debug.Log("Slime Rabbit hit a spike!");
+
+        // 1. Hide the Rabbit
+        Transform model = transform.Find("Model");
+        if (model != null) model.gameObject.SetActive(false);
+
+        // 2. Stop the game (as per instructor's required core #1)
+        Time.timeScale = 0;
+
+        // 3. Restart the level after 2 seconds
+        // Note: Since timeScale is 0, we use 'InvokeRealtime' or just restart manually
+        Invoke("RestartLevel", 2f);
+    }
+
+    private void RestartLevel()
+    {
+        Time.timeScale = 1f; // IMPORTANT: Reset time or the game stays frozen!
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     void Update()
     {
         _yVel += gravity * Time.deltaTime;
