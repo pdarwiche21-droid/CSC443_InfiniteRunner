@@ -88,15 +88,24 @@ public class PlayerController : MonoBehaviour
 
     private System.Collections.IEnumerator SlideCoroutine()
     {
-        // 1. Shrink the collider
-        SphereCollider col = GetComponent<SphereCollider>();
-        float originalRadius = col.radius;
-        col.radius = originalRadius * 0.5f; // Make it half height
+        // Change SphereCollider to CapsuleCollider
+        CapsuleCollider col = GetComponent<CapsuleCollider>();
 
-        yield return new WaitForSeconds(slideDuration);
+        if (col != null)
+        {
+            float originalHeight = col.height;
+            Vector3 originalCenter = col.center;
 
-        // 2. Return to normal
-        col.radius = originalRadius;
+            // 1. Shrink the height and lower the center so it's on the floor
+            col.height = originalHeight * 0.5f;
+            col.center = new Vector3(originalCenter.x, originalCenter.y * 0.5f, originalCenter.z);
+
+            yield return new WaitForSeconds(slideDuration);
+
+            // 2. Return to normal
+            col.height = originalHeight;
+            col.center = originalCenter;
+        }
     }
     private void RestartLevel()
     {

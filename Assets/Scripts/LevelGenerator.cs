@@ -7,6 +7,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject[] chunkPrefabs;
     [SerializeField] private int chunkPoolSize = 3;
 
+    [Header("Special Chunks")]
+    [SerializeField] private GameObject initialChunkPrefab;
+
     [Header("Streaming")]
     [SerializeField] private float spawnAhead = 80f;
     [SerializeField] private float recycleBehind = 20f;
@@ -33,6 +36,11 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
+        if (initialChunkPrefab != null)
+        {
+            SpawnSpecificChunk(initialChunkPrefab);
+        }
+
         while (_spawnZ < spawnAhead) SpawnNextChunk();
     }
 
@@ -55,7 +63,22 @@ public class LevelGenerator : MonoBehaviour
                 Recycle(i);
         }
     }
+    private void SpawnSpecificChunk(GameObject prefab)
+    {
+        Chunk template = prefab.GetComponent<Chunk>();
 
+        // Get it from the pool (or instantiate if not pooled)
+        Chunk chunk = _pools[template].Get(transform);
+
+        chunk.transform.SetPositionAndRotation(
+            new Vector3(0f, 0f, _spawnZ + chunk.Length * 0.5f),
+            Quaternion.identity);
+
+        _activeChunks.Add(chunk);
+        _instanceToPrefab[chunk] = template;
+        _spawnZ += chunk.Length;
+        _currentExit = chunk.Exit; // Update the exit so the next random chunk connects correctly
+    }
     private void SpawnNextChunk()
     {
         Chunk prefab = PickNextChunk(_currentExit);
