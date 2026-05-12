@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpVelocity = 8f;
     [SerializeField] private float gravity = -25f;
 
+    [Header("Animations")]
+    [SerializeField] private Animator animator; 
+    [SerializeField] private float slideDuration = 1.0f;
+
     private int _laneIndex;
     private float _y;
     private float _yVel;
@@ -20,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        // We drive position directly, so any rigidbody on this object must be kinematic.
+        //  drive position directly any rigidbody on  object must be kinematic
         if (TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = true;
@@ -34,6 +38,11 @@ public class PlayerController : MonoBehaviour
         if (v.x > 0.5f && _prevMove.x <= 0.5f) ChangeLane(+1);
         else if (v.x < -0.5f && _prevMove.x >= -0.5f) ChangeLane(-1);
         if (v.y > 0.5f && _prevMove.y <= 0.5f && _y <= 0f) _yVel = jumpVelocity;
+
+        if (v.y < -0.5f && _prevMove.y >= -0.5f && _y <= 0f)
+        {
+            StartSlide();
+        }
         _prevMove = v;
     }
 
@@ -55,18 +64,40 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Slime Rabbit hit a spike!");
 
-        // 1. Hide the Rabbit
+        // Hide the Rabbit
         Transform model = transform.Find("Model");
         if (model != null) model.gameObject.SetActive(false);
 
-        // 2. Stop the game (as per instructor's required core #1)
+        // Stop the game
         Time.timeScale = 0;
 
-        // 3. Restart the level after 2 seconds
-        // Note: Since timeScale is 0, we use 'InvokeRealtime' or just restart manually
+        //  Restart the level after 2 seconds
+        
         Invoke("RestartLevel", 2f);
     }
+    private void StartSlide()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("isSliding");
+        }
 
+        // Logic to shrink collider so you fit under the arch
+        StartCoroutine(SlideCoroutine());
+    }
+
+    private System.Collections.IEnumerator SlideCoroutine()
+    {
+        // 1. Shrink the collider
+        SphereCollider col = GetComponent<SphereCollider>();
+        float originalRadius = col.radius;
+        col.radius = originalRadius * 0.5f; // Make it half height
+
+        yield return new WaitForSeconds(slideDuration);
+
+        // 2. Return to normal
+        col.radius = originalRadius;
+    }
     private void RestartLevel()
     {
         Time.timeScale = 1f; // IMPORTANT: Reset time or the game stays frozen!
