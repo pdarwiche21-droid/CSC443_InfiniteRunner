@@ -726,12 +726,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
   chunkPrefabs:
-  - {fileID: 53845519711498772, guid: 9803300084fe4418d90b7e6a603d0cbf, type: 3}
   - {fileID: 6230059130620351680, guid: 7ca0b3ebd5ce84f418cdb6ca1acc40c6, type: 3}
   - {fileID: 6230059130620351680, guid: 517932deb26594102a6561c2e7d1847b, type: 3}
   - {fileID: 6230059130620351680, guid: 5d1896fd335bb4d4e8c61dc976a85a68, type: 3}
   - {fileID: 6230059130620351680, guid: 1061128312916450eb2d3aa8afb40be9, type: 3}
   - {fileID: 6230059130620351680, guid: 72d5ed870fd9043ad9d413124fe447f7, type: 3}
+  - {fileID: 8712000992499624680, guid: 2209fd66c6b2a47fa9d17f2c466e3919, type: 3}
   chunkPoolSize: 8
   initialChunkPrefab: {fileID: 8712000992499624680, guid: 2209fd66c6b2a47fa9d17f2c466e3919, type: 3}
   spawnAhead: 100
