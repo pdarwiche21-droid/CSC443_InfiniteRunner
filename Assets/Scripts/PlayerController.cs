@@ -35,15 +35,29 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext ctx)
     {
         Vector2 v = ctx.ReadValue<Vector2>();
+
+        // LANE SWITCHING (A and D / Left and Right)
         if (v.x > 0.5f && _prevMove.x <= 0.5f) ChangeLane(+1);
         else if (v.x < -0.5f && _prevMove.x >= -0.5f) ChangeLane(-1);
-        if (v.y > 0.5f && _prevMove.y <= 0.5f && _y <= 0f) _yVel = jumpVelocity;
-        AudioManager.Instance.PlayJump();
 
+        // JUMPING (W / Up)
+        // We check if Y is up, and if we are currently on the ground (_y <= 0)
+        if (v.y > 0.5f && _prevMove.y <= 0.5f)
+        {
+            if (_y <= 0f)
+            {
+                _yVel = jumpVelocity;
+                // The sound is now INSIDE the check, so it only plays for W/Up
+                AudioManager.Instance.PlayJump();
+            }
+        }
+
+        // SLIDING (S / Down)
         if (v.y < -0.5f && _prevMove.y >= -0.5f && _y <= 0f)
         {
             StartSlide();
         }
+
         _prevMove = v;
     }
 
