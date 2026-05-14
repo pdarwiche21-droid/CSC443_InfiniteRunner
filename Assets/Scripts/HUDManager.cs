@@ -86,4 +86,5 @@ public class HUDManager : MonoBehaviour
         Time.timeScale = 1f; // Reset time so the menu isn't frozen 
         SceneManager.LoadScene("MainMenu"); // Make sure your menu scene is named exactly this 
     }
+
 }
