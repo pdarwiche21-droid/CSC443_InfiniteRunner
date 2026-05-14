@@ -1569,6 +1569,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 21e9fccfea552ac419ade258159ed24e, type: 3}
   slideSound: {fileID: 8300000, guid: 9005b6902eea3684d91153c6a894249f, type: 3}
   deathSound: {fileID: 8300000, guid: 05ec1280dcd636a46a713d425b3dc8d0, type: 3}
+  pickupSound: {fileID: 8300000, guid: bc52ceeccadb4d14690a423a2b95139e, type: 3}
 --- !u!4 &1157886037
 Transform:
   m_ObjectHideFlags: 0
@@ -3447,7 +3448,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5209232050194784156, guid: 2209fd66c6b2a47fa9d17f2c466e3919, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2209fd66c6b2a47fa9d17f2c466e3919, type: 3}
