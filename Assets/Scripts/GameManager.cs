@@ -36,5 +36,6 @@ public class GameManager : MonoBehaviour
         {
             levelMusic.Stop();
         }
+        AudioManager.Instance.PlayDeath();
     }
 }

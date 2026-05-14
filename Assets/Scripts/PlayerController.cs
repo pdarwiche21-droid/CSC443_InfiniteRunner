@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         if (v.x > 0.5f && _prevMove.x <= 0.5f) ChangeLane(+1);
         else if (v.x < -0.5f && _prevMove.x >= -0.5f) ChangeLane(-1);
         if (v.y > 0.5f && _prevMove.y <= 0.5f && _y <= 0f) _yVel = jumpVelocity;
+        AudioManager.Instance.PlayJump();
 
         if (v.y < -0.5f && _prevMove.y >= -0.5f && _y <= 0f)
         {
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("isSliding");
         }
-
+        AudioManager.Instance.PlaySlide();
         // Logic to shrink collider so you fit under the arch
         StartCoroutine(SlideCoroutine());
     }
