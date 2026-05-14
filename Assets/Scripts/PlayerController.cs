@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Slime Rabbit hit a spike!");
         GameManager.Instance.EndGame();
+
+        FindObjectOfType<HUDManager>().ShowDeathScreen();
         // Hide the Rabbit
         Transform model = transform.Find("Model");
         if (model != null) model.gameObject.SetActive(false);
