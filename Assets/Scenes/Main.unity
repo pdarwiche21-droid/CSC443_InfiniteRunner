@@ -1537,6 +1537,53 @@ MonoBehaviour:
   curveY: 0.0008
   curveX: 0.15
   curveFreq: 0.05
+--- !u!1 &1157886035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157886037}
+  - component: {fileID: 1157886036}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1157886036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157886035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de9600f9d9b67f4ab0d9201eba01936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  jumpSound: {fileID: 8300000, guid: 21e9fccfea552ac419ade258159ed24e, type: 3}
+  slideSound: {fileID: 8300000, guid: 9005b6902eea3684d91153c6a894249f, type: 3}
+  deathSound: {fileID: 8300000, guid: 05ec1280dcd636a46a713d425b3dc8d0, type: 3}
+--- !u!4 &1157886037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157886035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 621.96625, y: 264.64352, z: -1.38544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168772753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,3 +3655,4 @@ SceneRoots:
   - {fileID: 1168772758}
   - {fileID: 950609371}
   - {fileID: 1404690442}
+  - {fileID: 1157886037}
