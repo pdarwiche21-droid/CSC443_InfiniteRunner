@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip slideSound;
     [SerializeField] private AudioClip deathSound;
-
+    [SerializeField] private AudioClip pickupSound;
     private AudioSource _sfxSource;
 
     void Awake()
@@ -18,7 +18,13 @@ public class AudioManager : MonoBehaviour
 
         _sfxSource = gameObject.AddComponent<AudioSource>();
     }
-
+    public void PlayPickup()
+    {
+        if (pickupSound != null)
+        {
+            _sfxSource.PlayOneShot(pickupSound);
+        }
+    }
     public void PlayJump() => PlaySound(jumpSound);
     public void PlaySlide() => PlaySound(slideSound);
     public void PlayDeath() => PlaySound(deathSound);
