@@ -5,6 +5,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [SerializeField] private GameConfig config;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource levelMusic;
+
     public float ScrollSpeed { get; private set; }
     public float Distance { get; private set; }
     public bool isGameOver { get; private set; } // Added this flag
@@ -28,5 +31,10 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         ScrollSpeed = 0;
+
+        if (levelMusic != null)
+        {
+            levelMusic.Stop();
+        }
     }
 }
