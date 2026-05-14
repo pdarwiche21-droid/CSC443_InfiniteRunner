@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         Debug.Log("Slime Rabbit hit a spike!");
-
+        GameManager.Instance.EndGame();
         // Hide the Rabbit
         Transform model = transform.Find("Model");
         if (model != null) model.gameObject.SetActive(false);
@@ -73,7 +73,9 @@ public class PlayerController : MonoBehaviour
 
         //  Restart the level after 2 seconds
         
+        if (model != null) model.gameObject.SetActive(false);
         Invoke("RestartLevel", 2f);
+
     }
     private void StartSlide()
     {
